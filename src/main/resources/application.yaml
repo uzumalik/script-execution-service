@@ -1,0 +1,73 @@
+
+server:
+  port: 9080
+  servlet:
+    context-path: /script-engine
+
+#Actuator Configuration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  app:
+    name: ${name}
+    version: ${version}
+    description: ${description}
+
+# executor config
+executor:
+  core-pool-size: 5
+  max-pool-size: 10
+  queue-capacity: 50
+  keep-alive-seconds: 50
+  thread-group-name: SCRIPT-EXECUTOR
+  thread-name-prefix: ENGINE-THREAD-
+
+# groovy sandbox security config
+groovy-config:
+  execution-time-out: 1s
+  security:
+    imports-blacklist:
+      - java.io.File
+      - java.io.FileDescriptor
+      - java.io.FileInputStream
+      - java.io.FileOutputStream
+      - java.io.FileWriter
+      - java.io.FileReader
+
+    star-imports-blacklist:
+      - java.nio.file
+      - java.net
+      - javax.net
+      - javax.net.ssl
+      - java.lang.reflect
+
+    illegal-classes:
+      - java.lang.Runtime
+      - java.lang.ProcessBuilder
+
+    illegal-assignment-classes:
+      - java.lang.System
+      - java.lang.Runtime
+      - java.lang.ProcessBuilder
+      - java.lang.Class
+
+    illegal-properties:
+      methods:
+        - java.lang.System
+        - java.lang.Class
+
+    illegal-methods:
+      "java.lang.System" :
+        - exit
+      "java.lang.Class":
+        - forName
+
+
