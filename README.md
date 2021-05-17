@@ -13,7 +13,7 @@ use below arguments to activate profile on startup
 
 -Dspring.profiles.active=dev
 
-Use below arguments to run service with security manager
+Use below arguments to run service with security manager (No working at the moment)
 -Dspring.profiles.active=dev -Djava.security.debug=access,stacktrace -Djava.security.manager -Djava.security.policy=resources/security/permissions.policy
 
 ### Run as jar executable
